@@ -1,60 +1,58 @@
 package br.com.anamnese.config;
 
-import br.com.anamnese.service.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.builders.*;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Autowired
-    private UsuarioDetailsService usuarioDetailsService;
+    private UserDetailsService userDetailsService;
 
+    // Define o provider de autenticação com nosso serviço de usuário
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Criptografia segura de senhas
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(new BCryptPasswordEncoder()); // Usar BCrypt para senhas
+        return authProvider;
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        // Usa a implementação injetada, que está ligada ao banco via UsuarioRepository
-        return usuarioDetailsService;
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager(); // necessário se futuramente você quiser login programático
-    }
-
+    // Define as regras de segurança da aplicação
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/register", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/img/**", "/login", "/register").permitAll()
                         .requestMatchers("/medico/**").hasRole("MEDICO")
-                        .requestMatchers("/cliente/**").hasRole("CLIENTE")
+                        .requestMatchers("/paciente/**").hasRole("PACIENTE")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/dashboard", true)
+                        .defaultSuccessUrl("/posLogin", true) // Essa URL vai decidir para onde redirecionar conforme a role
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 )
-                .exceptionHandling(handling -> handling
-                        .accessDeniedPage("/acesso-negado")
-                );
+                .csrf(csrf -> csrf.disable()); // Desativa CSRF se for usar apenas para testes (pode ativar depois)
+
         return http.build();
+    }
+
+    // Encoder de senha
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

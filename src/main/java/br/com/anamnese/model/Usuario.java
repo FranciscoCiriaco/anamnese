@@ -1,9 +1,14 @@
 package br.com.anamnese.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +19,7 @@ public class Usuario {
     private String senha;
 
     @Enumerated(EnumType.STRING)
-    private Role role; // CLIENTE ou MEDICO
+    private Role role; // ROLE_MEDICO ou ROLE_PACIENTE
 
     private boolean autorizado; // Médico autoriza o acesso do cliente à ficha
     private boolean ativo; // Para controle de acesso no login
@@ -32,7 +37,7 @@ public class Usuario {
         this.ativo = ativo;
     }
 
-    // Getters e Setters
+    // Getters e Setters normais
 
     public Long getId() { return id; }
 
@@ -61,4 +66,41 @@ public class Usuario {
     public boolean isAtivo() { return ativo; }
 
     public void setAtivo(boolean ativo) { this.ativo = ativo; }
+
+    // Métodos obrigatórios do UserDetails (Spring Security)
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(() -> role.name());
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email; // login será feito pelo e-mail
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return ativo;
+    }
 }

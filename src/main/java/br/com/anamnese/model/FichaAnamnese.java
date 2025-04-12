@@ -1,7 +1,7 @@
 package br.com.anamnese.model;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
 
 @Entity
 public class FichaAnamnese {
