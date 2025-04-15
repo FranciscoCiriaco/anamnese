@@ -1,9 +1,11 @@
 package br.com.anamnese.service;
 
 import br.com.anamnese.model.Paciente;
-import br.com.anamnese.repository.PacienteRepository;
+import br.com.anamnese.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PacienteService {
@@ -11,11 +13,19 @@ public class PacienteService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-    public Paciente buscarPorUsuarioId(Long usuarioId) {
-        return pacienteRepository.findByUsuarioId(usuarioId);
+    public List<Paciente> listarTodos() {
+        return pacienteRepository.findAll();
     }
 
-    public void salvar(Paciente paciente) {
-        pacienteRepository.save(paciente);
+    public Paciente buscarPorId(Long id) {
+        return pacienteRepository.findById(id).orElse(null);
+    }
+
+    public Paciente salvar(Paciente paciente) {
+        return pacienteRepository.save(paciente);
+    }
+
+    public void excluir(Long id) {
+        pacienteRepository.deleteById(id);
     }
 }

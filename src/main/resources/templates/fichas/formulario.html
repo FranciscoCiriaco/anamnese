@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ficha de Anamnese</title>
+</head>
+<body>
+<h1>Ficha de Anamnese</h1>
+<form th:action="@{/fichas}" th:object="${fichaAnamnese}" method="post">
+    <h2>Dados Pessoais</h2>
+    <label>Endereco:</label>
+    <input type="text" th:field="*{endereco}" required>
+
+    <label>Bairro:</label>
+    <input type="text" th:field="*{bairro}" required>
+
+    <label>Cidade:</label>
+    <input type="text" th:field="*{cidade}" required>
+
+    <label>Estado:</label>
+    <input type="text" th:field="*{estado}" required>
+
+    <label>CEP:</label>
+    <input type="text" th:field="*{cep}" required>
+
+    <label>Data Nascimento:</label>
+    <input type="date" th:field="*{dataNascimento}" required>
+
+    <label>Sexo:</label>
+    <select th:field="*{sexo}">
+        <option value="Masculino">Masculino</option>
+        <option value="Feminino">Feminino</option>
+    </select>
+
+    <label>Profissão:</label>
+    <input type="text" th:field="*{profissao}" required>
+
+    <label>Número para Contato:</label>
+    <input type="text" th:field="*{numeroContato}" required>
+
+    <h2>Dados Gerais</h2>
+    <label>Queixa Principal:</label>
+    <textarea th:field="*{queixaPrincipal}" required></textarea>
+
+    <label>Costuma ir ao Podólogo?</label>
+    <input type="checkbox" th:field="*{costumaIrAoPodologo}">
+
+    <label>Frequência:</label>
+    <input type="text" th:field="*{frequenciaPodologo}">
+
+    <!-- Adicione campos similares para os outros dados da ficha de anamnese -->
+
+    <button type="submit">Salvar</button>
+</form>
+</body>
+</html>
