@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "pacientes")
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

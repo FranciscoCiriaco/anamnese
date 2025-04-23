@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/pacientes")
+@RequestMapping("/paciente")
 public class PacienteController {
 
     @Autowired
@@ -17,36 +17,36 @@ public class PacienteController {
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("pacientes", pacienteService.listarTodos());
-        return "pacientes/listar";
+        return "paciente/listar";
     }
 
     @GetMapping("/novo")
     public String novo(Model model) {
         model.addAttribute("paciente", new Paciente());
-        return "pacientes/formulario";
+        return "paciente/formulario";
     }
 
     @PostMapping
     public String salvar(@ModelAttribute Paciente paciente) {
         pacienteService.salvar(paciente);
-        return "redirect:/pacientes";
+        return "redirect:/paciente";
     }
 
     @GetMapping("/{id}")
     public String visualizar(@PathVariable Long id, Model model) {
         model.addAttribute("paciente", pacienteService.buscarPorId(id));
-        return "pacientes/detalhes";
+        return "paciente/detalhes";
     }
 
     @GetMapping("/{id}/editar")
     public String editar(@PathVariable Long id, Model model) {
         model.addAttribute("paciente", pacienteService.buscarPorId(id));
-        return "pacientes/formulario";
+        return "paciente/formulario";
     }
 
     @PostMapping("/{id}/remover")
     public String remover(@PathVariable Long id) {
         pacienteService.excluir(id);
-        return "redirect:/pacientes";
+        return "redirect:/paciente";
     }
 }

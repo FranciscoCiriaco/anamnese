@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Lista de Pacientes</h1>
-<a href="/pacientes/novo">Novo Paciente</a>
+<a href="/paciente/novo">Novo Paciente</a>
 <table>
     <thead>
     <tr>
@@ -19,9 +19,9 @@
         <td th:text="${paciente.nome}"></td>
         <td th:text="${paciente.email}"></td>
         <td>
-            <a th:href="@{/pacientes/{id}(id=${paciente.id})}">Visualizar</a>
-            <a th:href="@{/pacientes/{id}/editar(id=${paciente.id})}">Editar</a>
-            <form th:action="@{/pacientes/{id}/remover(id=${paciente.id})}" method="post" style="display:inline;">
+            <a th:href="@{/paciente/{id}(id=${paciente.id})}">Visualizar</a>
+            <a th:href="@{/paciente/{id}/editar(id=${paciente.id})}">Editar</a>
+            <form th:action="@{/paciente/{id}/remover(id=${paciente.id})}" method="post" style="display:inline;">
                 <button type="submit">Remover</button>
             </form>
         </td>

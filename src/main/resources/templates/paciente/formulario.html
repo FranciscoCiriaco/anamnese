@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Cadastro de Paciente</h1>
-<form th:action="@{/pacientes}" th:object="${paciente}" method="post">
+<form th:action="@{/paciente}" th:object="${paciente}" method="post">
   <label>Nome:</label>
   <input type="text" th:field="*{nome}" required>
   <label>Email:</label>
