@@ -1,32 +1,41 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Lista de Pacientes</title>
+    <meta charset="UTF-8">
 </head>
 <body>
-<h1>Lista de Pacientes</h1>
-<a href="/paciente/novo">Novo Paciente</a>
-<table>
-    <thead>
-    <tr>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="paciente : ${pacientes}">
-        <td th:text="${paciente.nome}"></td>
-        <td th:text="${paciente.email}"></td>
-        <td>
-            <a th:href="@{/paciente/{id}(id=${paciente.id})}">Visualizar</a>
-            <a th:href="@{/paciente/{id}/editar(id=${paciente.id})}">Editar</a>
-            <form th:action="@{/paciente/{id}/remover(id=${paciente.id})}" method="post" style="display:inline;">
-                <button type="submit">Remover</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <h1>Lista de Pacientes</h1>
+
+    <form method="get" action="/paciente">
+        <input type="text" name="busca" placeholder="Buscar por nome...">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <a href="/paciente/novo">+ Novo Paciente</a>
+
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="paciente : ${pacientes}">
+                <td th:text="${paciente.nome}">Nome</td>
+                <td th:text="${paciente.email}">Email</td>
+                <td>
+                    <a th:href="@{'/fichas/nova/' + ${paciente.id}}">Ficha de Anamnese</a> |
+                    <a th:href="@{/paciente/{id}/editar(id=${paciente.id})}">Editar</a> |
+                    <form th:action="@{/paciente/{id}/remover(id=${paciente.id})}" method="post" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja remover?')">Remover</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

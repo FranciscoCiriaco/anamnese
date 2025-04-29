@@ -24,6 +24,15 @@ public class FichaAnamneseController {
         model.addAttribute("fichas", fichaAnamneseService.listarTodos());
         return "fichas/listar";
     }
+//    @GetMapping("/nova/{pacienteId}")
+//    public String novaFicha(@PathVariable Long pacienteId, Model model) {
+//        FichaAnamnese ficha = new FichaAnamnese();
+//        Paciente paciente = pacienteService.buscarPorId(pacienteId);
+//        ficha.setPaciente(paciente);
+//        model.addAttribute("ficha", ficha);
+//        return "fichas/formulario"; // Vamos criar esse HTML no frontend
+//    }
+
 
     @GetMapping("/nova/{pacienteId}")
     public String nova(@PathVariable Long pacienteId, Model model) {

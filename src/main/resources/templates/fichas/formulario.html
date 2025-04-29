@@ -1,55 +1,67 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Ficha de Anamnese</title>
 </head>
 <body>
-<h1>Ficha de Anamnese</h1>
-<form th:action="@{/fichas}" th:object="${fichaAnamnese}" method="post">
-    <h2>Dados Pessoais</h2>
-    <label>Endereco:</label>
-    <input type="text" th:field="*{endereco}" required>
+    <h1>Ficha de Anamnese</h1>
 
-    <label>Bairro:</label>
-    <input type="text" th:field="*{bairro}" required>
+    <form th:action="@{/fichas}" th:object="${fichaAnamnese}" method="post">
+        <!-- Campo oculto para o ID do paciente -->
+        <input type="hidden" th:field="*{paciente.id}"/>
 
-    <label>Cidade:</label>
-    <input type="text" th:field="*{cidade}" required>
+        <fieldset>
+            <legend>Dados Pessoais</legend>
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" th:field="*{endereco}" required>
 
-    <label>Estado:</label>
-    <input type="text" th:field="*{estado}" required>
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" th:field="*{bairro}" required>
 
-    <label>CEP:</label>
-    <input type="text" th:field="*{cep}" required>
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" th:field="*{cidade}" required>
 
-    <label>Data Nascimento:</label>
-    <input type="date" th:field="*{dataNascimento}" required>
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" th:field="*{estado}" required>
 
-    <label>Sexo:</label>
-    <select th:field="*{sexo}">
-        <option value="Masculino">Masculino</option>
-        <option value="Feminino">Feminino</option>
-    </select>
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" th:field="*{cep}" required>
 
-    <label>Profissão:</label>
-    <input type="text" th:field="*{profissao}" required>
+            <label for="dataNascimento">Data de Nascimento:</label>
+            <input type="date" id="dataNascimento" th:field="*{dataNascimento}">
 
-    <label>Número para Contato:</label>
-    <input type="text" th:field="*{numeroContato}" required>
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" th:field="*{sexo}">
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+            </select>
 
-    <h2>Dados Gerais</h2>
-    <label>Queixa Principal:</label>
-    <textarea th:field="*{queixaPrincipal}" required></textarea>
+            <label for="profissao">Profissão:</label>
+            <input type="text" id="profissao" th:field="*{profissao}">
 
-    <label>Costuma ir ao Podólogo?</label>
-    <input type="checkbox" th:field="*{costumaIrAoPodologo}">
+            <label for="numeroContato">Número de Contato:</label>
+            <input type="text" id="numeroContato" th:field="*{numeroContato}">
+        </fieldset>
 
-    <label>Frequência:</label>
-    <input type="text" th:field="*{frequenciaPodologo}">
+        <fieldset>
+            <legend>Dados Gerais</legend>
+            <label for="queixaPrincipal">Queixa Principal:</label>
+            <textarea id="queixaPrincipal" th:field="*{queixaPrincipal}"></textarea>
 
-    <!-- Adicione campos similares para os outros dados da ficha de anamnese -->
+            <label>Costuma ir ao Podólogo?</label>
+            <input type="checkbox" th:field="*{costumaIrAoPodologo}">
 
-    <button type="submit">Salvar</button>
-</form>
+            <label for="frequenciaPodologo">Frequência:</label>
+            <input type="text" id="frequenciaPodologo" th:field="*{frequenciaPodologo}">
+        </fieldset>
+
+        <!-- Outras seções podem ser adicionadas aqui, como Dados Clínicos, Lesões etc. -->
+
+        <br>
+        <button type="submit">Salvar</button>
+        <a href="/paciente">Cancelar</a>
+    </form>
 </body>
 </html>
