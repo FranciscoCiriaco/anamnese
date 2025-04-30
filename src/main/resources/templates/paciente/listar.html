@@ -28,8 +28,8 @@
                 <td th:text="${paciente.nome}">Nome</td>
                 <td th:text="${paciente.email}">Email</td>
                 <td>
-                    <a th:href="@{'/fichas/nova/' + ${paciente.id}}">Ficha de Anamnese</a> |
-                    <a th:href="@{/paciente/{id}/editar(id=${paciente.id})}">Editar</a> |
+                    <a th:href="@{'/fichas/nova/' + ${paciente.id}}">Cadastrar Ficha de Anamnese</a> |
+                    <a th:href="@{/paciente/{id}/editar(id=${paciente.id})}">Editar Ficha do Paciente</a> |
                     <form th:action="@{/paciente/{id}/remover(id=${paciente.id})}" method="post" style="display:inline;">
                         <button type="submit" onclick="return confirm('Tem certeza que deseja remover?')">Remover</button>
                     </form>

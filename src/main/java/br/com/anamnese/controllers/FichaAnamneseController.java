@@ -43,6 +43,7 @@ public class FichaAnamneseController {
         return "fichas/formulario";
     }
 
+
     @PostMapping
     public String salvar(@ModelAttribute FichaAnamnese fichaAnamnese) {
         fichaAnamneseService.salvar(fichaAnamnese);

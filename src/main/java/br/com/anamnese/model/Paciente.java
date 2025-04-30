@@ -1,7 +1,10 @@
 package br.com.anamnese.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -46,14 +49,6 @@ public class Paciente {
         this.email = email;
     }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
     public List<FichaAnamnese> getFichasAnamnese() {
         return fichasAnamnese;
     }
@@ -63,7 +58,17 @@ public class Paciente {
     }
 
     private String telefone;
-    private LocalDate dataNascimento;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dataNascimento;
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FichaAnamnese> fichasAnamnese;

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Fichas de Anamnese</title>
+</head>
+<body>
+<h1>Lista de Fichas de Anamnese</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Paciente</th>
+        <th>Sexo</th>
+        <th>Contato</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ficha : ${fichas}">
+        <td th:text="${ficha.paciente.nome}">Nome do Paciente</td>
+        <td th:text="${ficha.sexo}">Masculino</td>
+        <td th:text="${ficha.numeroContato}">(00) 00000-0000</td>
+        <td>
+            <a th:href="@{'/fichas/' + ${ficha.id}}">Visualizar</a> |
+            <a th:href="@{/fichas/editar/ + ${ficha.id}}">Editar</a>
+            <a th:href="@{/paciente/{id}/editar(id=${paciente.id})}">Editar Ficha do Paciente</a> |
+            |
+            <a th:href="@{'/fichas/excluir/' + ${ficha.id}}"
+               onclick="return confirm('Tem certeza que deseja excluir esta ficha?')">Excluir</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/fichas/nova">Nova Ficha</a>
+<a href="/paciente">Voltar</a>
+</body>
+</html>
