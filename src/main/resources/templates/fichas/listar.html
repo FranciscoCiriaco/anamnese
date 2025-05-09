@@ -18,16 +18,15 @@
     </thead>
     <tbody>
     <tr th:each="ficha : ${fichas}">
-        <td th:text="${ficha.paciente.nome}">Nome do Paciente</td>
-        <td th:text="${ficha.sexo}">Masculino</td>
-        <td th:text="${ficha.numeroContato}">(00) 00000-0000</td>
+        <td th:text="${ficha.id}"></td>
+
+        <td th:if="${ficha.paciente != null}" th:text="${ficha.paciente.nome}">Paciente</td>
+        <td th:unless="${ficha.paciente != null}">Paciente não associado</td>
+
         <td>
-            <a th:href="@{'/fichas/' + ${ficha.id}}">Visualizar</a> |
-            <a th:href="@{/fichas/editar/ + ${ficha.id}}">Editar</a>
-            <a th:href="@{/paciente/{id}/editar(id=${paciente.id})}">Editar Ficha do Paciente</a> |
-            |
-            <a th:href="@{'/fichas/excluir/' + ${ficha.id}}"
-               onclick="return confirm('Tem certeza que deseja excluir esta ficha?')">Excluir</a>
+            <a th:if="${ficha.paciente != null}"
+               th:href="@{/fichas/{id}/editar(id=${ficha.id})}">Editar</a>
+            <span th:unless="${ficha.paciente != null}">---</span>
         </td>
     </tr>
     </tbody>

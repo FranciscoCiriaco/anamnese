@@ -4,59 +4,132 @@
 <head>
     <meta charset="UTF-8">
     <title>Ficha de Anamnese</title>
+    <style>
+        fieldset { margin-bottom: 20px; padding: 10px; border-radius: 8px; }
+        label { display: inline-block; width: 200px; margin-top: 8px; }
+        input, select { width: 250px; margin-bottom: 10px; }
+<<<<<<<<<<<<<<  ✨ Windsurf Command ⭐ >>>>>>>>>>>>>>>>
+        input[type="date"] { width: 150px; }
+<<<<<<<  29262261-19aa-4a87-9fd7-bfcd66b0fd02  >>>>>>>>
+    </style>
 </head>
 <body>
     <h1>Ficha de Anamnese</h1>
-
     <form th:action="@{/fichas}" th:object="${fichaAnamnese}" method="post">
-        <!-- Campo oculto para o ID do paciente -->
-        <input type="hidden" th:field="*{paciente.id}"/>
+        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{paciente.id}" />
+<fieldset><legend>Informações Básicas</legend>
+<label>endereco:</label><input type="text" th:field="*{endereco}" required/><br>
+<label>bairro:</label><input type="text" th:field="*{bairro}" required/><br>
+<label>cidade:</label><input type="text" th:field="*{cidade}" required/><br>
+<label>estado:</label><input type="text" th:field="*{estado}" required/><br>
+<label>cep:</label><input type="text" th:field="*{cep}" required/><br>
+<label>dataNascimento:</label><input type="date" th:field="*{dataNascimento}" required/><br>
+<label>sexo:</label><input type="text" th:field="*{sexo}" required/><br>
+<label>profissao:</label><input type="text" th:field="*{profissao}" required/><br>
+<label>numeroContato:</label><input type="text" th:field="*{numeroContato}"/><br>
+<label>cpfPaciente:</label><input type="text" th:field="*{cpfPaciente}"/><br>
+<label>rgPaciente:</label><input type="text" th:field="*{rgPaciente}"/><br>
+<label>assinaturaPaciente:</label><input type="text" th:field="*{assinaturaPaciente}"/><br>
+</fieldset>
+<fieldset><legend>Histórico de Saúde</legend>
+<label>queixaPrincipal:</label><input type="text" th:field="*{queixaPrincipal}"/><br>
+<input type="hidden" name="costumaIrAoPodologo" value="false"/>
+<label>costumaIrAoPodologo:</label><input type="checkbox" th:field="*{costumaIrAoPodologo}"/><br>
+<label>frequenciaPodologo:</label><input type="text" th:field="*{frequenciaPodologo}"/><br>
+<input type="hidden" name="fazUsoDeMedicamento" value="false"/>
+<label>fazUsoDeMedicamento:</label><input type="checkbox" th:field="*{fazUsoDeMedicamento}"/><br>
+<label>qualMedicamento:</label><input type="text" th:field="*{qualMedicamento}"/><br>
+<input type="hidden" name="alergico" value="false"/>
+<label>alergico:</label><input type="checkbox" th:field="*{alergico}"/><br>
+<label>substanciasAlergicas:</label><input type="text" th:field="*{substanciasAlergicas}"/><br>
+<label>posicaoTrabalho:</label><input type="text" th:field="*{posicaoTrabalho}"/><br>
+<input type="hidden" name="fazUsoDePalmilha" value="false"/>
+<label>fazUsoDePalmilha:</label><input type="checkbox" th:field="*{fazUsoDePalmilha}"/><br>
+<label>tipoPalmilha:</label><input type="text" th:field="*{tipoPalmilha}"/><br>
+<input type="hidden" name="gestante" value="false"/>
+<label>gestante:</label><input type="checkbox" th:field="*{gestante}"/><br>
+<label>gestanteClinico:</label><input type="text" th:field="*{gestanteClinico}"/><br>
+<input type="hidden" name="amamentando" value="false"/>
+<label>amamentando:</label><input type="checkbox" th:field="*{amamentando}"/><br>
+<input type="hidden" name="fumante" value="false"/>
+<label>fumante:</label><input type="checkbox" th:field="*{fumante}"/><br>
+<input type="hidden" name="praticaAtividadeFisica" value="false"/>
+<label>praticaAtividadeFisica:</label><input type="checkbox" th:field="*{praticaAtividadeFisica}"/><br>
+<label>frequenciaAtividadeFisica:</label><input type="text" th:field="*{frequenciaAtividadeFisica}"/><br>
+<label>esporte:</label><input type="text" th:field="*{esporte}"/><br>
+</fieldset>
+<fieldset><legend>Calçados e Pés</legend>
+<label>tipoDeCalcadoEsporte:</label><input type="text" th:field="*{tipoDeCalcadoEsporte}"/><br>
+<label>tipoDeCalcadoDiario:</label><input type="text" th:field="*{tipoDeCalcadoDiario}"/><br>
+<label>quedaDeMetatarso:</label><input type="text" th:field="*{quedaDeMetatarso}"/><br>
+<label>martelo:</label><input type="text" th:field="*{martelo}"/><br>
+<label>dedosEspalmados:</label><input type="text" th:field="*{dedosEspalmados}"/><br>
+<label>dedosRigidos:</label><input type="text" th:field="*{dedosRigidos}"/><br>
+<label>fissuras:</label><input type="text" th:field="*{fissuras}"/><br>
+<label>calo:</label><input type="text" th:field="*{calo}"/><br>
+<label>caloComNucleo:</label><input type="text" th:field="*{caloComNucleo}"/><br>
+<label>calosidade:</label><input type="text" th:field="*{calosidade}"/><br>
+<label>verrugaPlantar:</label><input type="text" th:field="*{verrugaPlantar}"/><br>
+<label>granuloma:</label><input type="text" th:field="*{granuloma}"/><br>
+<label>onicoatrofia:</label><input type="text" th:field="*{onicoatrofia}"/><br>
+<label>onicofose:</label><input type="text" th:field="*{onicofose}"/><br>
+<label>onicogrifose:</label><input type="text" th:field="*{onicogrifose}"/><br>
+<label>onicrocriptose:</label><input type="text" th:field="*{onicrocriptose}"/><br>
+<label>onicolise:</label><input type="text" th:field="*{onicolise}"/><br>
+<label>onicorrexe:</label><input type="text" th:field="*{onicorrexe}"/><br>
+<label>onicomicose:</label><input type="text" th:field="*{onicomicose}"/><br>
+<label>psoriaseUngueal:</label><input type="text" th:field="*{psoriaseUngueal}"/><br>
+</fieldset>
+<fieldset><legend>Doenças e Condições Clínicas</legend>
+<input type="hidden" name="hipertiroidismo" value="false"/>
+<label>hipertiroidismo:</label><input type="checkbox" th:field="*{hipertiroidismo}"/><br>
+<input type="hidden" name="hipotiroidismo" value="false"/>
+<label>hipotiroidismo:</label><input type="checkbox" th:field="*{hipotiroidismo}"/><br>
+<input type="hidden" name="hipotensao" value="false"/>
+<label>hipotensao:</label><input type="checkbox" th:field="*{hipotensao}"/><br>
+<input type="hidden" name="hipertensao" value="false"/>
+<label>hipertensao:</label><input type="checkbox" th:field="*{hipertensao}"/><br>
+<label>cardiopatia:</label><input type="text" th:field="*{cardiopatia}"/><br>
+<label>marcaPasso:</label><input type="text" th:field="*{marcaPasso}"/><br>
+<input type="hidden" name="neuropatia" value="false"/>
+<label>neuropatia:</label><input type="checkbox" th:field="*{neuropatia}"/><br>
+<label>isquemia:</label><input type="text" th:field="*{isquemia}"/><br>
+<label>osteoporose:</label><input type="text" th:field="*{osteoporose}"/><br>
+<label>reumatismo:</label><input type="text" th:field="*{reumatismo}"/><br>
+<label>antecedentesOncologicos:</label><input type="text" th:field="*{antecedentesOncologicos}"/><br>
+<label>renais:</label><input type="text" th:field="*{renais}"/><br>
+<label>quimioterapiaRadioterapia:</label><input type="text" th:field="*{quimioterapiaRadioterapia}"/><br>
+<input type="hidden" name="psoriase" value="false"/>
+<label>psoriase:</label><input type="checkbox" th:field="*{psoriase}"/><br>
+<label>hidrose:</label><input type="text" th:field="*{hidrose}"/><br>
+<label>bromidrose:</label><input type="text" th:field="*{bromidrose}"/><br>
+<label>malPerfurante:</label><input type="text" th:field="*{malPerfurante}"/><br>
+<label>tinea:</label><input type="text" th:field="*{tinea}"/><br>
+<label>tungiase:</label><input type="text" th:field="*{tungiase}"/><br>
+</fieldset>
+<fieldset><legend>Dados Metabólicos</legend>
+<label>diabetes:</label><input type="text" th:field="*{diabetes}"/><br>
+<label>taxaGlicemia:</label><input type="text" th:field="*{taxaGlicemia}"/><br>
+<label>dataUltimaVerificacaoGlicemia:</label><input type="date" th:field="*{dataUltimaVerificacaoGlicemia}"/><br>
+<input type="hidden" name="fazUsoDeInsulina" value="false"/>
+<label>fazUsoDeInsulina:</label><input type="checkbox" th:field="*{fazUsoDeInsulina}"/><br>
+<label>dietaHidrica:</label><input type="text" th:field="*{dietaHidrica}"/><br>
+<label>dietaAlimentar:</label><input type="text" th:field="*{dietaAlimentar}"/><br>
+</fieldset>
+<fieldset><legend>Avaliação Postural</legend>
+<label>cavoSupinado:</label><input type="text" th:field="*{cavoSupinado}"/><br>
+<label>normalNeutro:</label><input type="text" th:field="*{normalNeutro}"/><br>
+<label>planoPronado:</label><input type="text" th:field="*{planoPronado}"/><br>
+<label>alteracoesVasculares:</label><input type="text" th:field="*{alteracoesVasculares}"/><br>
+<label>perfusao:</label><input type="text" th:field="*{perfusao}"/><br>
+<label>edema:</label><input type="text" th:field="*{edema}"/><br>
+</fieldset>
+<fieldset><legend>Outros</legend>
+<label>outrasAlteracoes:</label><input type="text" th:field="*{outrasAlteracoes}"/><br>
+</fieldset>
 
-        <fieldset>
-            <legend>Dados Pessoais</legend>
-            <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" th:field="*{endereco}" required>
-
-            <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" th:field="*{bairro}" required>
-
-            <label for="cidade">Cidade:</label>
-            <input type="text" id="cidade" th:field="*{cidade}" required>
-
-            <label for="estado">Estado:</label>
-            <input type="text" id="estado" th:field="*{estado}" required>
-
-            <label for="cep">CEP:</label>
-            <input type="text" id="cep" th:field="*{cep}" required>
-
-            <label for="sexo">Sexo:</label>
-            <select id="sexo" th:field="*{sexo}">
-                <option value="Masculino">Masculino</option>
-                <option value="Feminino">Feminino</option>
-            </select>
-
-            <label for="profissao">Profissão:</label>
-            <input type="text" id="profissao" th:field="*{profissao}">
-
-        </fieldset>
-
-        <fieldset>
-            <legend>Dados Gerais</legend>
-            <label for="queixaPrincipal">Queixa Principal:</label>
-            <textarea id="queixaPrincipal" th:field="*{queixaPrincipal}"></textarea>
-
-            <label>Costuma ir ao Podólogo?</label>
-            <input type="checkbox" th:field="*{costumaIrAoPodologo}">
-
-            <label for="frequenciaPodologo">Frequência:</label>
-            <input type="text" id="frequenciaPodologo" th:field="*{frequenciaPodologo}">
-        </fieldset>
-
-        <!-- Outras seções podem ser adicionadas aqui, como Dados Clínicos, Lesões etc. -->
-
-        <br>
         <button type="submit">Salvar</button>
-        <a href="/paciente">Cancelar</a>
     </form>
 </body>
 </html>
